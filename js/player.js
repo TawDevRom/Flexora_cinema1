@@ -158,16 +158,21 @@ window.addEventListener("keydown", (e) => {
     }
 })
 const controls = document.querySelector(".controls")
+const logo_player = document.querySelector(".logo_player")
 
 
 let hideTimer = null
 
 function hideControlNow() {
-    if (!video.paused) controls.classList.add("hidden")
+    if (!video.paused) {
+        controls.classList.add("hidden")
+        logo_player.classList.add("hidden")
+    }
 }
 
 function showControls() {
     controls.classList.remove("hidden")
+    logo_player.classList.remove("hidden")
 
     if (hideTimer) clearTimeout(hideTimer)
     
