@@ -12,6 +12,21 @@ body {
     height: 100vh;
 }
 
+.logo_player {
+    position: absolute;
+    height: 60px;
+    top: 8%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: top .2s ease, opacity .2s ease;
+}
+
+.logo_player.hidden{
+    opacity: 0;
+    padding-top: 0px;
+    pointer-events: none;
+}
+
 video {
     width: 100vw;
     height: 99.9vh;
