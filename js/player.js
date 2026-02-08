@@ -71,6 +71,7 @@ function fmt(sec, showHours = false) {
 
 const seek = document.getElementById("seek")
 const timeEl = document.getElementById("time")
+const volumeControl = document.getElementById("volume")
 
 let showHours = false
 let isSeeking = false
@@ -102,6 +103,10 @@ seek.addEventListener("change", () => {
     video.currentTime = seek.value
     isSeeking = false
     timeEl.textContent = `${fmt(Number(seek.value), showHours)} / ${fmt(video.duration, showHours)}`
+})
+
+volumeControl.addEventListener("input", () => {
+    video.volume = volumeControl.value;
 })
 
 const player = document.getElementById("player")
@@ -157,8 +162,19 @@ window.addEventListener("keydown", (e) => {
         return 
     }
 })
+
+video.addEventListener("click", () => {
+    showControls()
+    if (video.paused) video.play()
+    else video.pause()
+})
+video.addEventListener("dblclick", () => {
+    toggleFullScreen()
+})
 const controls = document.querySelector(".controls")
 const logo_player = document.querySelector(".logo_player")
+const player_cancel_img_ico = document.querySelector(".player_cancel_img_ico")
+const age_restriction = document.querySelector(".age_restriction")
 
 
 let hideTimer = null
@@ -167,12 +183,16 @@ function hideControlNow() {
     if (!video.paused) {
         controls.classList.add("hidden")
         logo_player.classList.add("hidden")
+        player_cancel_img_ico.classList.add("hidden")
+        age_restriction.classList.add("hidden")
     }
 }
 
 function showControls() {
     controls.classList.remove("hidden")
     logo_player.classList.remove("hidden")
+    player_cancel_img_ico.classList.remove("hidden")
+    age_restriction.classList.remove("hidden")
 
     if (hideTimer) clearTimeout(hideTimer)
     
